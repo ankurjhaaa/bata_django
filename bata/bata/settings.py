@@ -126,3 +126,4 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # CORS Configuration
 CORS_ALLOW_ALL_ORIGINS = True
+LOGIN_URL = '/login/'
