@@ -1,0 +1,180 @@
+{% extends 'layout/publiclayout.html' %}
+
+{% block title %}
+Red Boost Sneaker - Bata
+{% endblock %}
+
+{% block content %}
+<div class="w-full bg-[#f9fafb] min-h-screen border-y-[40px] px-0 border-transparent">
+    <div class="max-w-7xl mx-auto border-x-[15px] md:border-x-[30px] border-transparent">
+        
+        <!-- Breadcrumbs -->
+        <nav class="flex text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-[30px]" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center gap-[10px]">
+                <li><a href="/" class="hover:text-red-600 transition-colors">Home</a></li>
+                <li>/</li>
+                <li><a href="/search" class="hover:text-red-600 transition-colors">Men's Sneakers</a></li>
+                <li>/</li>
+                <li class="text-gray-900" aria-current="page">Red Boost Sneaker</li>
+            </ol>
+        </nav>
+
+        <!-- Product Details -->
+        <div class="flex flex-col md:flex-row gap-[40px] bg-white border-[1px] border-gray-200 shadow-sm rounded-sm mb-[60px]">
+            
+            <!-- Image Gallery -->
+            <div class="md:w-1/2 shrink-0 border-[20px] md:border-[40px] border-transparent">
+                <div class="relative aspect-square bg-[#f5f5f5] rounded-sm overflow-hidden mb-[15px]">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Red Boost Sneaker">
+                    <span class="absolute top-[15px] left-[15px] bg-black text-white text-[11px] font-bold uppercase tracking-wider border-[2px] border-transparent"><span class="border-y-[3px] border-x-[8px] border-transparent inline-block">New</span></span>
+                    <button class="absolute top-[15px] right-[15px] w-[40px] h-[40px] bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-600 shadow-sm transition-colors border-[2px] border-transparent">
+                        <i class="far fa-heart text-lg"></i>
+                    </button>
+                </div>
+                
+                <!-- Thumbnails -->
+                <div class="flex gap-[10px]">
+                    <div class="w-1/4 aspect-square bg-[#f5f5f5] rounded-sm overflow-hidden border-[2px] border-gray-900 cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-1/4 aspect-square bg-[#f5f5f5] rounded-sm overflow-hidden border-[1px] border-gray-200 hover:border-gray-400 cursor-pointer transition-colors">
+                        <!-- Simulated alternate angle -->
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover hue-rotate-[10deg]">
+                    </div>
+                    <div class="w-1/4 aspect-square bg-[#f5f5f5] rounded-sm overflow-hidden border-[1px] border-gray-200 hover:border-gray-400 cursor-pointer transition-colors">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover hue-rotate-[-10deg]">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="md:w-1/2 border-[20px] md:border-y-[40px] md:border-r-[40px] md:border-l-0 border-transparent flex flex-col">
+                <p class="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-[10px]">Men • Running</p>
+                <h1 class="text-3xl md:text-4xl font-black text-gray-900 mb-[15px] leading-tight text-balance">Red Boost Sneaker</h1>
+                
+                <div class="flex items-center gap-[15px] mb-[25px]">
+                    <p class="text-2xl md:text-3xl font-black text-red-600">$129.00</p>
+                    <div class="flex text-yellow-400 text-sm">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span class="text-xs font-bold text-gray-400 underline cursor-pointer">(128 Reviews)</span>
+                </div>
+
+                <p class="text-sm text-gray-500 font-medium leading-relaxed mb-[30px]">
+                    Experience unparalleled comfort and bold style with the Red Boost Sneaker. Engineered for performance and designed for the streets, featuring breathable mesh upper and ultra-responsive cushioning.
+                </p>
+
+                <!-- Color Selection -->
+                <div class="mb-[30px]">
+                    <h3 class="text-[11px] font-bold text-gray-900 uppercase tracking-widest mb-[15px]">Color: <span class="text-gray-500">Crimson Red</span></h3>
+                    <div class="flex gap-[12px]">
+                        <button class="w-[35px] h-[35px] rounded-full bg-red-600 border-[2px] border-white shadow-[0_0_0_2px_#000] focus:outline-none"></button>
+                        <button class="w-[35px] h-[35px] rounded-full bg-black border-[1px] border-gray-200 hover:border-gray-400 transition-colors focus:outline-none"></button>
+                        <button class="w-[35px] h-[35px] rounded-full bg-blue-600 border-[1px] border-gray-200 hover:border-gray-400 transition-colors focus:outline-none"></button>
+                    </div>
+                </div>
+
+                <!-- Size Selection -->
+                <div class="mb-[40px]">
+                    <div class="flex justify-between items-center mb-[15px]">
+                        <h3 class="text-[11px] font-bold text-gray-900 uppercase tracking-widest">Select Size (US)</h3>
+                        <a href="#" class="text-[10px] font-bold text-gray-400 uppercase tracking-widest underline hover:text-red-600">Size Guide</a>
+                    </div>
+                    <div class="grid grid-cols-4 sm:grid-cols-5 gap-[10px]">
+                        <button class="border-[1px] border-gray-200 bg-white text-gray-500 font-bold text-sm border-y-[10px] border-transparent hover:border-black hover:text-black transition-colors rounded-sm">7</button>
+                        <button class="border-[1px] border-gray-200 bg-white text-gray-500 font-bold text-sm border-y-[10px] border-transparent hover:border-black hover:text-black transition-colors rounded-sm">7.5</button>
+                        <button class="border-[1px] border-black bg-white text-black font-bold text-sm border-y-[10px] border-transparent rounded-sm relative overflow-hidden">
+                            8
+                            <span class="absolute top-0 right-0 w-[0] h-[0] border-t-[10px] border-r-[10px] border-r-black border-t-transparent"></span>
+                        </button>
+                        <button class="border-[1px] border-gray-200 bg-white text-gray-500 font-bold text-sm border-y-[10px] border-transparent hover:border-black hover:text-black transition-colors rounded-sm">8.5</button>
+                        <button class="border-[1px] border-gray-200 bg-white text-gray-500 font-bold text-sm border-y-[10px] border-transparent hover:border-black hover:text-black transition-colors rounded-sm">9</button>
+                        <button class="border-[1px] border-gray-200 bg-white text-gray-500 font-bold text-sm border-y-[10px] border-transparent hover:border-black hover:text-black transition-colors rounded-sm">9.5</button>
+                        <button class="border-[1px] border-gray-100 bg-gray-50 text-gray-300 font-bold text-sm border-y-[10px] border-transparent cursor-not-allowed rounded-sm relative" disabled>
+                            10
+                            <div class="absolute inset-0 flex items-center justify-center"><div class="w-full h-[1px] bg-gray-200 rotate-45 transform"></div></div>
+                        </button>
+                        <button class="border-[1px] border-gray-200 bg-white text-gray-500 font-bold text-sm border-y-[10px] border-transparent hover:border-black hover:text-black transition-colors rounded-sm">10.5</button>
+                        <button class="border-[1px] border-gray-200 bg-white text-gray-500 font-bold text-sm border-y-[10px] border-transparent hover:border-black hover:text-black transition-colors rounded-sm">11</button>
+                    </div>
+                </div>
+
+                <!-- Add to Cart -->
+                <div class="flex flex-col sm:flex-row gap-[15px] mt-auto">
+                    <!-- Quantity -->
+                    <div class="flex items-center justify-between border-[1px] border-gray-300 rounded-sm sm:w-[120px] shrink-0 bg-white">
+                        <button class="border-y-[15px] border-x-[15px] border-transparent text-gray-500 hover:text-black font-bold text-lg leading-none">-</button>
+                        <span class="font-bold text-sm text-gray-900 border-y-[15px] border-x-[5px] border-transparent block">1</span>
+                        <button class="border-y-[15px] border-x-[15px] border-transparent text-gray-500 hover:text-black font-bold text-lg leading-none">+</button>
+                    </div>
+                    
+                    <a href="/cart" class="grow flex items-center justify-center bg-red-600 text-white font-black uppercase text-xs tracking-widest border-[1px] border-red-600 hover:bg-white hover:text-red-600 transition-colors rounded-sm shadow-sm">
+                        <span class="border-y-[15px] border-transparent block"><i class="fas fa-shopping-bag mr-[8px]"></i> Add To Bag</span>
+                    </a>
+                </div>
+
+                <!-- Product Metadta -->
+                <div class="mt-[30px] border-t-[1px] border-gray-100 border-t-[20px] !border-t-transparent pt-[20px]">
+                    <div class="flex flex-col gap-[10px]">
+                        <p class="text-xs text-gray-500 font-medium"><span class="font-bold text-gray-900 w-[80px] inline-block uppercase tracking-widest text-[9px]">SKU:</span> BTA-RD-892</p>
+                        <p class="text-xs text-gray-500 font-medium"><span class="font-bold text-gray-900 w-[80px] inline-block uppercase tracking-widest text-[9px]">Availability:</span> <span class="text-green-600 font-bold">In Stock</span> (Only 5 left)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- You May Also Like -->
+        <div>
+            <div class="flex justify-between items-end mb-[25px] border-b-[2px] border-red-600 pb-[10px]">
+               <h2 class="text-lg font-black text-gray-900 uppercase tracking-widest">You May Also Like</h2>
+               <a href="/search" class="text-[10px] font-bold text-gray-400 uppercase tracking-widest hover:text-red-600">View All</a>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-[15px] md:gap-[25px]">
+                {% for i in '1234' %}
+                <div class="group bg-white border-[1px] border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 relative rounded-sm flex flex-col cursor-pointer" onclick="window.location.href='/product'">
+                    <div class="border-[15px] border-transparent grow flex flex-col">
+                        <div class="relative aspect-[4/5] bg-[#f5f5f5] mb-[15px] overflow-hidden rounded-sm w-full">
+                            {% if forloop.counter == 1 %}
+                                <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            {% elif forloop.counter == 2 %}
+                                <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <span class="absolute top-[8px] left-[8px] bg-black text-white text-[10px] font-bold uppercase tracking-wider border-[2px] border-transparent"><span class="border-y-[2px] border-x-[6px] border-transparent inline-block">Trending</span></span>
+                            {% elif forloop.counter == 3 %}
+                                <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <span class="absolute top-[8px] left-[8px] bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider border-[2px] border-transparent"><span class="border-y-[2px] border-x-[6px] border-transparent inline-block">-20%</span></span>
+                            {% else %}
+                                <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            {% endif %}
+                        </div>
+                        <div class="flex flex-col text-center mt-auto">
+                            {% if forloop.counter == 1 %}
+                                <h3 class="text-xs font-bold text-gray-800 mb-[5px] truncate group-hover:text-red-600 transition-colors">Classic White Oxford</h3>
+                                <p class="text-sm font-black text-gray-900">$89.50</p>
+                            {% elif forloop.counter == 2 %}
+                                <h3 class="text-xs font-bold text-gray-800 mb-[5px] truncate group-hover:text-red-600 transition-colors">Neon Runner V2</h3>
+                                <p class="text-sm font-black text-gray-900">$105.00</p>
+                            {% elif forloop.counter == 3 %}
+                                <h3 class="text-xs font-bold text-gray-800 mb-[5px] truncate group-hover:text-red-600 transition-colors">Elegant Evening Pump</h3>
+                                <div class="flex items-center justify-center gap-[10px]">
+                                    <p class="text-[11px] text-gray-400 font-bold line-through">$110.00</p>
+                                    <p class="text-sm font-black text-red-600">$88.00</p>
+                                </div>
+                            {% else %}
+                                <h3 class="text-xs font-bold text-gray-800 mb-[5px] truncate group-hover:text-red-600 transition-colors">Classic Urban Runner</h3>
+                                <p class="text-sm font-black text-gray-900">$89.99</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

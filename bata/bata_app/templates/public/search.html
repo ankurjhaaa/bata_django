@@ -51,7 +51,7 @@ Search - Bata
                             {% endif %}
                             
                             {% if forloop.counter == 2 or forloop.counter == 4 %}
-                            <button class="absolute top-[8px] right-[8px] w-[30px] h-[30px] bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-600 shadow-sm transition-colors border-[2px] border-transparent">
+                            <button class="absolute top-[8px] right-[8px] w-[30px] h-[30px] bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-600 shadow-sm transition-colors border-[2px] border-transparent" onclick="event.stopPropagation();">
                                 <i class="far fa-heart text-sm"></i>
                             </button>
                             {% endif %}

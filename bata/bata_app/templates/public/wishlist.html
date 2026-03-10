@@ -1,0 +1,157 @@
+{% extends 'layout/publiclayout.html' %}
+
+{% block title %}
+My Wishlist - Bata
+{% endblock %}
+
+{% block content %}
+<div class="w-full bg-[#f9fafb] min-h-[80vh] border-y-[40px] px-0 border-transparent">
+    <div class="max-w-7xl mx-auto border-x-[15px] md:border-x-[30px] border-transparent">
+        
+        <!-- Dashboard Header -->
+        <h1 class="text-2xl md:text-3xl font-black text-gray-900 uppercase tracking-widest mb-[30px] border-b-[2px] border-red-600 pb-[10px] inline-block">My Account</h1>
+        
+        <div class="flex flex-col lg:flex-row gap-[30px]">
+            
+            <!-- Sidebar -->
+            <div class="lg:w-[280px] shrink-0">
+                <div class="bg-white border-[1px] border-gray-200 shadow-sm rounded-sm mb-[15px]">
+                    <div class="border-[25px] border-transparent flex items-center gap-[15px]">
+                        <div class="w-[55px] h-[55px] bg-gray-100 rounded-full flex items-center justify-center border-[1px] border-gray-200 shrink-0">
+                            <span class="text-xl font-black text-gray-800">JD</span>
+                        </div>
+                        <div>
+                            <h2 class="text-sm font-black uppercase text-gray-900 tracking-wider mb-[5px]">John Doe</h2>
+                            <p class="text-xs font-medium text-gray-500">user@example.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border-[1px] border-gray-200 shadow-sm rounded-sm flex flex-col overflow-hidden">
+                    <a href="/profile" class="font-semibold text-gray-600 hover:text-red-600 hover:bg-gray-50 border-l-[3px] border-transparent uppercase text-[11px] flex items-center transition-colors tracking-widest">
+                        <div class="border-y-[15px] border-x-[20px] border-transparent w-full flex items-center"><i class="fas fa-th-large w-[25px] text-sm"></i> Dashboard</div>
+                    </a>
+                    <a href="/orders" class="font-semibold text-gray-600 hover:text-red-600 hover:bg-gray-50 border-l-[3px] border-transparent uppercase text-[11px] flex items-center transition-colors tracking-widest border-t-[1px] border-gray-100">
+                        <div class="border-y-[15px] border-x-[20px] border-transparent w-full flex items-center"><i class="fas fa-box w-[25px] text-sm"></i> My Orders</div>
+                    </a>
+                    <a href="/wishlist" class="font-bold text-red-600 bg-red-50 border-l-[3px] !border-l-red-600 uppercase text-[11px] flex items-center tracking-widest transition-colors border-t-[1px] border-gray-100">
+                        <div class="border-y-[15px] border-x-[20px] border-transparent w-full flex items-center"><i class="fas fa-heart w-[25px] text-sm"></i> Wishlist</div>
+                    </a>
+                    <a href="/addresses" class="font-semibold text-gray-600 hover:text-red-600 hover:bg-gray-50 border-l-[3px] border-transparent uppercase text-[11px] flex items-center transition-colors tracking-widest border-t-[1px] border-gray-100">
+                        <div class="border-y-[15px] border-x-[20px] border-transparent w-full flex items-center"><i class="fas fa-map-marker-alt w-[25px] text-sm"></i> Addresses</div>
+                    </a>
+                    <a href="/profile" class="font-semibold text-gray-600 hover:text-red-600 hover:bg-gray-50 border-l-[3px] border-transparent uppercase text-[11px] flex items-center transition-colors tracking-widest border-t-[1px] border-gray-100">
+                        <div class="border-y-[15px] border-x-[20px] border-transparent w-full flex items-center"><i class="far fa-id-badge w-[25px] text-sm"></i> Account Details</div>
+                    </a>
+                    <a href="#" class="font-semibold text-gray-600 hover:text-red-600 hover:bg-gray-50 border-l-[3px] border-transparent uppercase text-[11px] flex items-center transition-colors tracking-widest border-t-[1px] border-gray-100">
+                        <div class="border-y-[15px] border-x-[20px] border-transparent w-full flex items-center"><i class="fas fa-sign-out-alt w-[25px] text-sm"></i> Logout</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Main Content: Wishlist -->
+            <div class="grow">
+                <div class="bg-white border-[1px] border-gray-200 shadow-sm rounded-sm flex flex-col h-full min-h-[500px]">
+                    <div class="border-[25px] border-transparent h-full flex flex-col">
+                        <div class="flex justify-between items-center mb-[25px] border-b-[1px] border-gray-100 pb-[15px]">
+                            <h2 class="text-sm font-black uppercase text-gray-900 tracking-wider">My Wishlist <span class="text-gray-400 font-bold ml-[5px]">(4 Items)</span></h2>
+                        </div>
+                        
+                        <!-- Wishlist Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[25px]">
+                            
+                            <!-- Item 1 -->
+                            <div class="group border-[1px] border-gray-200 hover:border-gray-800 transition-colors duration-300 relative rounded-sm flex flex-col cursor-pointer" onclick="window.location.href='/product'">
+                                <!-- Remove Button -->
+                                <button class="absolute top-[10px] right-[10px] w-[30px] h-[30px] bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-gray-900 shadow-sm transition-colors border-[2px] border-transparent z-10" onclick="event.stopPropagation();">
+                                    <i class="fas fa-times text-sm"></i>
+                                </button>
+                                
+                                <div class="border-[15px] border-transparent grow flex flex-col">
+                                    <div class="relative aspect-[4/5] bg-[#f5f5f5] mb-[15px] overflow-hidden rounded-sm w-full">
+                                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    </div>
+                                    <div class="flex flex-col text-center mt-auto">
+                                        <h3 class="text-sm font-bold text-gray-800 mb-[5px] truncate group-hover:text-red-600 transition-colors">Red Boost Sneaker</h3>
+                                        <p class="text-sm font-black text-gray-900 mb-[15px]">$129.00</p>
+                                        <button class="w-full bg-white text-gray-900 border-[1px] border-gray-900 hover:bg-gray-900 hover:text-white transition-colors font-bold uppercase tracking-widest text-[10px] rounded-sm shadow-sm" onclick="event.stopPropagation(); window.location.href='/cart'">
+                                            <span class="border-y-[10px] border-transparent block">Add To Bag</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 2 -->
+                            <div class="group border-[1px] border-gray-200 hover:border-gray-800 transition-colors duration-300 relative rounded-sm flex flex-col cursor-pointer" onclick="window.location.href='/product'">
+                                <button class="absolute top-[10px] right-[10px] w-[30px] h-[30px] bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-gray-900 shadow-sm transition-colors border-[2px] border-transparent z-10" onclick="event.stopPropagation();">
+                                    <i class="fas fa-times text-sm"></i>
+                                </button>
+                                
+                                <div class="border-[15px] border-transparent grow flex flex-col">
+                                    <div class="relative aspect-[4/5] bg-[#f5f5f5] mb-[15px] overflow-hidden rounded-sm w-full">
+                                        <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?ixlib=rb-4.0.3&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    </div>
+                                    <div class="flex flex-col text-center mt-auto">
+                                        <h3 class="text-sm font-bold text-gray-800 mb-[5px] truncate group-hover:text-red-600 transition-colors">Classic White Oxford</h3>
+                                        <p class="text-sm font-black text-gray-900 mb-[15px]">$89.50</p>
+                                        <button class="w-full bg-white text-gray-900 border-[1px] border-gray-900 hover:bg-gray-900 hover:text-white transition-colors font-bold uppercase tracking-widest text-[10px] rounded-sm shadow-sm" onclick="event.stopPropagation(); window.location.href='/cart'">
+                                            <span class="border-y-[10px] border-transparent block">Add To Bag</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 3 -->
+                            <div class="group border-[1px] border-gray-200 hover:border-gray-800 transition-colors duration-300 relative rounded-sm flex flex-col cursor-pointer" onclick="window.location.href='/product'">
+                                <button class="absolute top-[10px] right-[10px] w-[30px] h-[30px] bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-gray-900 shadow-sm transition-colors border-[2px] border-transparent z-10" onclick="event.stopPropagation();">
+                                    <i class="fas fa-times text-sm"></i>
+                                </button>
+                                
+                                <div class="border-[15px] border-transparent grow flex flex-col">
+                                    <div class="relative aspect-[4/5] bg-[#f5f5f5] mb-[15px] overflow-hidden rounded-sm w-full">
+                                        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                        <!-- Out of Stock Overlay -->
+                                        <div class="absolute inset-0 bg-white/70 flex items-center justify-center z-10">
+                                            <span class="bg-gray-900 text-white font-black uppercase tracking-widest text-[10px] border-[2px] border-gray-900 shadow-sm"><span class="border-y-[6px] border-x-[15px] border-transparent inline-block">Out of Stock</span></span>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col text-center mt-auto opacity-50">
+                                        <h3 class="text-sm font-bold text-gray-800 mb-[5px] truncate group-hover:text-red-600 transition-colors">Elegant Evening Pump</h3>
+                                        <p class="text-sm font-black text-gray-900 mb-[15px]">$88.00</p>
+                                        <button class="w-full bg-gray-100 text-gray-400 border-[1px] border-gray-200 cursor-not-allowed font-bold uppercase tracking-widest text-[10px] rounded-sm shadow-sm">
+                                            <span class="border-y-[10px] border-transparent block">Add To Bag</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 4 -->
+                            <div class="group border-[1px] border-gray-200 hover:border-gray-800 transition-colors duration-300 relative rounded-sm flex flex-col cursor-pointer" onclick="window.location.href='/product'">
+                                <button class="absolute top-[10px] right-[10px] w-[30px] h-[30px] bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-gray-900 shadow-sm transition-colors border-[2px] border-transparent z-10" onclick="event.stopPropagation();">
+                                    <i class="fas fa-times text-sm"></i>
+                                </button>
+                                
+                                <div class="border-[15px] border-transparent grow flex flex-col">
+                                    <div class="relative aspect-[4/5] bg-[#f5f5f5] mb-[15px] overflow-hidden rounded-sm w-full">
+                                        <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    </div>
+                                    <div class="flex flex-col text-center mt-auto">
+                                        <h3 class="text-sm font-bold text-gray-800 mb-[5px] truncate group-hover:text-red-600 transition-colors">Neon Runner V2</h3>
+                                        <p class="text-sm font-black text-gray-900 mb-[15px]">$105.00</p>
+                                        <button class="w-full bg-white text-gray-900 border-[1px] border-gray-900 hover:bg-gray-900 hover:text-white transition-colors font-bold uppercase tracking-widest text-[10px] rounded-sm shadow-sm" onclick="event.stopPropagation(); window.location.href='/cart'">
+                                            <span class="border-y-[10px] border-transparent block">Add To Bag</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}
