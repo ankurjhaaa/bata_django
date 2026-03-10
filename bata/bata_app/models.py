@@ -38,7 +38,6 @@ class Product(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     description = models.TextField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
-    base_price = models.DecimalField(max_digits=10, decimal_places=2)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -51,18 +50,16 @@ class Product(models.Model):
         verbose_name_plural = 'Products'
         ordering = ['-created_at']
 
-class ProductColorImage(models.Model):
+class VariantImage(models.Model):
     """
-    To store images for different colors of the same shoe.
-    e.g. A shoe comes in Black and Brown. Each color will have its own images.
+    To store images for a specific variant.
     """
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='color_images')
-    color = models.ForeignKey(Color, on_delete=models.CASCADE, related_name='+')
-    image = models.ImageField(upload_to='product_images/')
-    is_main = models.BooleanField(default=False, help_text="Main image for this color")
+    variant = models.ForeignKey('ProductVariant', on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='variant_images/')
+    is_main = models.BooleanField(default=False, help_text="Main image for this variant")
 
     def __str__(self):
-        return f"{self.product.name} - {self.color.name} Image"
+        return f"Image for {self.variant.product.name} ({self.variant.color} - {self.variant.size})"
 
 class ProductVariant(models.Model):
     """
@@ -74,13 +71,7 @@ class ProductVariant(models.Model):
     size = models.ForeignKey(Size, on_delete=models.CASCADE, related_name='+')
     sku = models.CharField(max_length=100, unique=True, help_text="Stock Keeping Unit")
     stock_quantity = models.PositiveIntegerField(default=0)
-    price_override = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, help_text="Leave blank to use product base price")
-    
-    @property
-    def price(self):
-        if self.price_override:
-            return self.price_override
-        return self.product.base_price
+    price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
         return f"{self.product.name} - {self.color.name} - {self.size.name}"

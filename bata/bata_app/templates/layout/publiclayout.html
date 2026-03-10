@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Bata{% endblock %}</title>
+    <!-- Add your CSS links here -->
+</head>
+<body>
+    <!-- Header Section -->
+    <header style="background-color: #f8f9fa; padding: 20px; text-align: center; border-bottom: 1px solid #ddd;">
+        <h2>Bata Website Header</h2>
+        <nav>
+            <a href="/">Home</a>
+        </nav>
+    </header>
+
+    <!-- Main Content Area where child templates will be injected -->
+    <main style="padding: 20px; min-height: 400px;">
+        {% block content %}
+        <!-- Default content can go here -->
+        {% endblock %}
+    </main>
+
+    <!-- Footer Section -->
+    <footer style="background-color: #f8f9fa; padding: 20px; text-align: center; border-top: 1px solid #ddd;">
+        <p>&copy; 2026 Bata. All rights reserved. Footer area.</p>
+    </footer>
+</body>
+</html>
