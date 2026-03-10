@@ -90,3 +90,226 @@ def addresses(request):
 @login_required
 def wishlist(request):
     return render(request, 'public/wishlist.html')
+# ==========================================
+# CUSTOM ADMIN PORTAL (UNAUTHENTICATED)
+# ==========================================
+from .models import Category, Product
+
+def admin_dashboard(request):
+    categories_count = Category.objects.count()
+    products_count = Product.objects.count()
+    return render(request, 'admin_custom/dashboard.html', {
+        'categories_count': categories_count,
+        'products_count': products_count
+    })
+
+# --- Category CRUD ---
+def admin_categories(request):
+    categories = Category.objects.all().order_by('-created_at')
+    return render(request, 'admin_custom/categories/list.html', {'categories': categories})
+
+def admin_category_create(request):
+    categories = Category.objects.all()
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        slug = request.POST.get('slug')
+        parent_id = request.POST.get('parent')
+        description = request.POST.get('description')
+        is_active = request.POST.get('is_active') == 'on'
+        image = request.FILES.get('image')
+
+        parent = Category.objects.filter(id=parent_id).first() if parent_id else None
+
+        Category.objects.create(
+            name=name, slug=slug, parent=parent, 
+            description=description, is_active=is_active, image=image
+        )
+        return redirect('admin_categories')
+    
+    return render(request, 'admin_custom/categories/form.html', {'categories': categories})
+
+def admin_category_edit(request, id):
+    category = Category.objects.get(id=id)
+    categories = Category.objects.all()
+    
+    if request.method == 'POST':
+        category.name = request.POST.get('name')
+        category.slug = request.POST.get('slug')
+        parent_id = request.POST.get('parent')
+        category.parent = Category.objects.filter(id=parent_id).first() if parent_id else None
+        category.description = request.POST.get('description')
+        category.is_active = request.POST.get('is_active') == 'on'
+        
+        if request.FILES.get('image'):
+            category.image = request.FILES.get('image')
+            
+        category.save()
+        return redirect('admin_categories')
+
+    return render(request, 'admin_custom/categories/form.html', {'category': category, 'categories': categories})
+
+def admin_category_delete(request, id):
+    if request.method == 'POST':
+        Category.objects.filter(id=id).delete()
+    return redirect('admin_categories')
+
+# --- Product CRUD ---
+def admin_products(request):
+    products = Product.objects.all().select_related('category').order_by('-created_at')
+    return render(request, 'admin_custom/products/list.html', {'products': products})
+
+def admin_product_create(request):
+    categories = Category.objects.all()
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        slug = request.POST.get('slug')
+        category_id = request.POST.get('category')
+        description = request.POST.get('description')
+        is_active = request.POST.get('is_active') == 'on'
+
+        category = Category.objects.filter(id=category_id).first()
+
+        Product.objects.create(
+            name=name, slug=slug, category=category,
+            description=description, is_active=is_active
+        )
+        return redirect('admin_products')
+    
+    return render(request, 'admin_custom/products/form.html', {'categories': categories})
+
+def admin_product_edit(request, id):
+    product = Product.objects.get(id=id)
+    categories = Category.objects.all()
+    
+    if request.method == 'POST':
+        product.name = request.POST.get('name')
+        product.slug = request.POST.get('slug')
+        category_id = request.POST.get('category')
+        product.category = Category.objects.filter(id=category_id).first()
+        product.description = request.POST.get('description')
+        product.is_active = request.POST.get('is_active') == 'on'
+        
+        product.save()
+        return redirect('admin_products')
+
+    return render(request, 'admin_custom/products/form.html', {'product': product, 'categories': categories})
+
+def admin_product_delete(request, id):
+    if request.method == 'POST':
+        Product.objects.filter(id=id).delete()
+    return redirect('admin_products')
+
+from .models import Color, Size, ProductVariant, VariantImage
+
+# --- Color CRUD ---
+def admin_colors(request):
+    colors = Color.objects.all().order_by('name')
+    return render(request, 'admin_custom/colors/list.html', {'colors': colors})
+
+def admin_color_create(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        hex_code = request.POST.get('hex_code')
+        Color.objects.create(name=name, hex_code=hex_code)
+        return redirect('admin_colors')
+    return render(request, 'admin_custom/colors/form.html')
+
+def admin_color_edit(request, id):
+    color = Color.objects.get(id=id)
+    if request.method == 'POST':
+        color.name = request.POST.get('name')
+        color.hex_code = request.POST.get('hex_code')
+        color.save()
+        return redirect('admin_colors')
+    return render(request, 'admin_custom/colors/form.html', {'color': color})
+
+def admin_color_delete(request, id):
+    if request.method == 'POST':
+        Color.objects.filter(id=id).delete()
+    return redirect('admin_colors')
+
+# --- Size CRUD ---
+def admin_sizes(request):
+    sizes = Size.objects.all().order_by('name')
+    return render(request, 'admin_custom/sizes/list.html', {'sizes': sizes})
+
+def admin_size_create(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        Size.objects.create(name=name)
+        return redirect('admin_sizes')
+    return render(request, 'admin_custom/sizes/form.html')
+
+def admin_size_edit(request, id):
+    size = Size.objects.get(id=id)
+    if request.method == 'POST':
+        size.name = request.POST.get('name')
+        size.save()
+        return redirect('admin_sizes')
+    return render(request, 'admin_custom/sizes/form.html', {'size': size})
+
+def admin_size_delete(request, id):
+    if request.method == 'POST':
+        Size.objects.filter(id=id).delete()
+    return redirect('admin_sizes')
+
+# --- Variant CRUD ---
+def admin_variant_create(request, product_id):
+    product = Product.objects.get(id=product_id)
+    colors = Color.objects.all()
+    sizes = Size.objects.all()
+    if request.method == 'POST':
+        color_id = request.POST.get('color')
+        size_id = request.POST.get('size')
+        sku = request.POST.get('sku')
+        stock = request.POST.get('stock_quantity')
+        price = request.POST.get('price')
+        color = Color.objects.get(id=color_id)
+        size = Size.objects.get(id=size_id)
+        variant = ProductVariant.objects.create(product=product, color=color, size=size, sku=sku, stock_quantity=stock, price=price)
+        return redirect('admin_variant_edit', id=variant.id)
+    return render(request, 'admin_custom/variants/form.html', {'product': product, 'colors': colors, 'sizes': sizes})
+
+def admin_variant_edit(request, id):
+    variant = ProductVariant.objects.get(id=id)
+    colors = Color.objects.all()
+    sizes = Size.objects.all()
+    images = variant.images.all()
+    
+    if request.method == 'POST':
+        if 'update_variant' in request.POST:
+            color_id = request.POST.get('color')
+            size_id = request.POST.get('size')
+            variant.sku = request.POST.get('sku')
+            variant.stock_quantity = request.POST.get('stock_quantity')
+            variant.price = request.POST.get('price')
+            variant.color = Color.objects.get(id=color_id)
+            variant.size = Size.objects.get(id=size_id)
+            variant.save()
+            return redirect('admin_product_edit', id=variant.product.id)
+        elif 'upload_image' in request.POST:
+            image_file = request.FILES.get('image')
+            is_main = request.POST.get('is_main') == 'on'
+            if is_main:
+                VariantImage.objects.filter(variant=variant).update(is_main=False)
+            if image_file:
+                VariantImage.objects.create(variant=variant, image=image_file, is_main=is_main)
+            return redirect('admin_variant_edit', id=variant.id)
+            
+    return render(request, 'admin_custom/variants/form.html', {'variant': variant, 'product': variant.product, 'colors': colors, 'sizes': sizes, 'images': images})
+
+def admin_variant_delete(request, id):
+    if request.method == 'POST':
+        variant = ProductVariant.objects.get(id=id)
+        product_id = variant.product.id
+        variant.delete()
+        return redirect('admin_product_edit', id=product_id)
+    return redirect('admin_products')
+
+def admin_variant_image_delete(request, id):
+    if request.method == 'POST':
+        image = VariantImage.objects.get(id=id)
+        variant_id = image.variant.id
+        image.delete()
+        return redirect('admin_variant_edit', id=variant_id)
+    return redirect('admin_products')

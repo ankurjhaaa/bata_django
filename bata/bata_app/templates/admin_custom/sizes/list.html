@@ -1,0 +1,52 @@
+{% extends 'layout/adminlayout.html' %}
+
+{% block title %}Sizes - Bata Admin{% endblock %}
+{% block page_title %}Sizes{% endblock %}
+
+{% block content %}
+<div class="bg-white border-[1px] border-gray-200 rounded-sm shadow-sm overflow-hidden flex flex-col">
+    <div class="border-b-[1px] border-gray-100 p-[20px] flex justify-between items-center">
+        <h3 class="text-sm font-black text-gray-900 uppercase tracking-widest">All Sizes</h3>
+        <a href="{% url 'admin_size_create' %}" class="bg-red-600 text-white font-bold text-[10px] uppercase tracking-widest px-[15px] py-[8px] rounded-sm hover:bg-red-700 transition-colors shadow-sm">
+            <i class="fas fa-plus mr-[3px]"></i> Add New
+        </a>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-gray-50 border-b-[1px] border-gray-200">
+                    <th class="py-[12px] px-[20px] text-[10px] font-bold text-gray-500 uppercase tracking-widest">Size</th>
+                    <th class="py-[12px] px-[20px] text-[10px] font-bold text-gray-500 uppercase tracking-widest text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for size in sizes %}
+                <tr class="border-b-[1px] border-gray-100 hover:bg-gray-50 transition-colors">
+                    <td class="py-[15px] px-[20px]">
+                        <p class="text-sm font-bold text-gray-800">{{ size.name }}</p>
+                    </td>
+                    <td class="py-[15px] px-[20px] text-right">
+                        <div class="flex justify-end gap-[10px]">
+                            <a href="{% url 'admin_size_edit' size.id %}" class="w-[30px] h-[30px] rounded-sm bg-gray-100 text-gray-500 hover:text-blue-600 hover:bg-blue-50 transition-colors flex items-center justify-center">
+                                <i class="fas fa-pen text-[11px]"></i>
+                            </a>
+                            <form action="{% url 'admin_size_delete' size.id %}" method="POST" onsubmit="return confirm('Delete this size?');" class="inline">
+                                {% csrf_token %}
+                                <button type="submit" class="w-[30px] h-[30px] rounded-sm bg-gray-100 text-gray-500 hover:text-red-600 hover:bg-red-50 transition-colors flex items-center justify-center">
+                                    <i class="fas fa-trash text-[11px]"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2" class="py-[40px] text-center text-sm font-medium text-gray-400">No sizes found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
