@@ -1,0 +1,93 @@
+{% extends 'layout/publiclayout.html' %}
+
+{% block title %}
+Search - Bata
+{% endblock %}
+
+{% block content %}
+<div class="w-full bg-[#f9fafb] min-h-screen border-y-[40px] px-0 border-transparent">
+    <div class="max-w-7xl mx-auto border-x-[15px] md:border-x-[30px] border-transparent">
+        
+        <!-- Search Header -->
+        <div class="max-w-3xl mx-auto text-center mb-[40px]">
+            <h1 class="text-3xl font-black text-gray-900 uppercase tracking-widest mb-[25px]">Find Your Style</h1>
+            
+            <div class="relative flex items-center shadow-sm max-w-2xl mx-auto bg-white border-[1px] border-gray-300 rounded-sm">
+                <i class="fas fa-search absolute left-[20px] text-gray-400 z-10"></i>
+                <!-- Input with padding simulated by transparent border -->
+                <input type="text" placeholder="Search for sneakers, formal shoes, categories..." class="w-full bg-transparent outline-none text-gray-700 text-sm focus:border-red-600 transition-colors font-medium border-y-[15px] border-l-[50px] border-r-[15px] md:border-r-[100px] border-transparent !border-y-transparent !border-x-transparent z-0 relative">
+                <button class="hidden md:flex absolute right-[5px] bg-red-600 text-white items-center justify-center border-y-[10px] border-x-[25px] border-transparent hover:bg-white hover:text-red-600 transition-colors font-bold uppercase text-xs rounded-sm shadow-sm z-10 border-[1px] border-red-600">Search</button>
+            </div>
+            <!-- Mobile search button -->
+            <button class="md:hidden mt-[15px] w-full max-w-2xl mx-auto bg-red-600 text-white border-y-[12px] border-transparent transition-colors font-bold uppercase text-xs rounded-sm flex items-center justify-center border-[1px] border-red-600">Search</button>
+            
+            <div class="mt-[20px] flex flex-wrap gap-[10px] justify-center items-center">
+                <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mr-[10px]">Popular:</span>
+                <a href="#" class="bg-white text-gray-500 font-semibold text-[10px] uppercase tracking-wide border-[1px] border-gray-200 hover:border-black hover:text-black transition-colors rounded-sm shadow-sm"><div class="border-y-[6px] border-x-[12px] border-transparent">Men's Sneakers</div></a>
+                <a href="#" class="bg-white text-gray-500 font-semibold text-[10px] uppercase tracking-wide border-[1px] border-gray-200 hover:border-black hover:text-black transition-colors rounded-sm shadow-sm"><div class="border-y-[6px] border-x-[12px] border-transparent">Women's Heels</div></a>
+                <a href="#" class="bg-white text-gray-500 font-semibold text-[10px] uppercase tracking-wide border-[1px] border-gray-200 hover:border-black hover:text-black transition-colors rounded-sm shadow-sm"><div class="border-y-[6px] border-x-[12px] border-transparent">Running Shoes</div></a>
+            </div>
+        </div>
+
+        <!-- Trending Products Grid -->
+        <div class="mt-[55px]">
+            <h2 class="text-lg font-black text-gray-900 uppercase tracking-widest mb-[25px] border-b-[2px] border-red-600 pb-[10px] inline-block">Trending Now</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[15px] md:gap-[25px]">
+                {% for i in '1234' %}
+                <div class="group bg-white border-[1px] border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 relative rounded-sm flex flex-col">
+                    <div class="border-[15px] border-transparent grow flex flex-col">
+                        <div class="relative aspect-[4/5] bg-[#f5f5f5] mb-[15px] overflow-hidden rounded-sm w-full">
+                            {% if forloop.counter == 1 %}
+                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <span class="absolute top-[8px] left-[8px] bg-black text-white text-[10px] font-bold uppercase tracking-wider border-[2px] border-transparent"><span class="border-y-[2px] border-x-[6px] border-transparent inline-block">New</span></span>
+                            {% elif forloop.counter == 2 %}
+                                <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            {% elif forloop.counter == 3 %}
+                                <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <span class="absolute top-[8px] left-[8px] bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider border-[2px] border-transparent"><span class="border-y-[2px] border-x-[6px] border-transparent inline-block">-20%</span></span>
+                            {% else %}
+                                <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            {% endif %}
+                            
+                            {% if forloop.counter == 2 or forloop.counter == 4 %}
+                            <button class="absolute top-[8px] right-[8px] w-[30px] h-[30px] bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-600 shadow-sm transition-colors border-[2px] border-transparent">
+                                <i class="far fa-heart text-sm"></i>
+                            </button>
+                            {% endif %}
+                        </div>
+                        <div class="flex flex-col text-center mt-auto">
+                            {% if forloop.counter == 1 %}
+                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-[5px]">Men • Running</p>
+                                <h3 class="text-sm font-bold text-gray-800 mb-[10px] truncate group-hover:text-red-600 transition-colors">Red Boost Sneaker</h3>
+                                <p class="text-sm font-black text-gray-900">$129.00</p>
+                            {% elif forloop.counter == 2 %}
+                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-[5px]">Men • Casual</p>
+                                <h3 class="text-sm font-bold text-gray-800 mb-[10px] truncate group-hover:text-red-600 transition-colors">Classic White Oxford</h3>
+                                <p class="text-sm font-black text-gray-900">$89.50</p>
+                            {% elif forloop.counter == 3 %}
+                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-[5px]">Women • Heels</p>
+                                <h3 class="text-sm font-bold text-gray-800 mb-[10px] truncate group-hover:text-red-600 transition-colors">Elegant Evening Pump</h3>
+                                <div class="flex items-center justify-center gap-[10px]">
+                                    <p class="text-[11px] text-gray-400 font-bold line-through">$110.00</p>
+                                    <p class="text-sm font-black text-red-600">$88.00</p>
+                                </div>
+                            {% else %}
+                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-[5px]">Unisex • Sneakers</p>
+                                <h3 class="text-sm font-bold text-gray-800 mb-[10px] truncate group-hover:text-red-600 transition-colors">Neon Runner V2</h3>
+                                <p class="text-sm font-black text-gray-900">$105.00</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <div class="mt-[50px] text-center">
+                 <button class="bg-transparent text-gray-900 border-[1px] border-gray-900 hover:bg-gray-900 hover:text-white transition-colors font-bold uppercase text-xs tracking-widest rounded-sm"><div class="border-y-[12px] border-x-[30px] border-transparent inline-block">Load More Products</div></button>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

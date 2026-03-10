@@ -1,0 +1,91 @@
+{% extends 'layout/publiclayout.html' %}
+
+{% block title %}
+Shopping Cart - Bata
+{% endblock %}
+
+{% block content %}
+    <div class="w-full bg-[#fafafa] min-h-[70vh]">
+        <div class="max-w-6xl mx-auto border-y-[40px] md:border-y-[60px] border-x-[15px] md:border-x-[40px] border-transparent">
+            
+            <h1 class="text-3xl md:text-4xl font-black text-gray-900 uppercase tracking-widest border-b-[2px] border-red-600 pb-[10px] inline-block mb-[30px]">Shopping Cart</h1>
+            
+            <!-- Cart Layout -->
+            <div class="flex flex-col lg:flex-row gap-[30px]">
+                
+                <!-- Items Box (Sleek) -->
+                <div class="lg:w-2/3 flex flex-col gap-[15px]">
+                    
+                    <div class="flex justify-between items-center pb-[10px]">
+                        <h2 class="text-sm font-bold uppercase text-gray-800 tracking-wider">Your Items <span class="text-gray-400 font-medium">(2)</span></h2>
+                        <button class="text-xs font-semibold text-gray-400 hover:text-red-600 transition-colors uppercase border-b-[1px] border-transparent hover:border-red-600 pb-[2px]">Clear Cart</button>
+                    </div>
+
+                    <!-- Cart Item 1 -->
+                    <div class="flex flex-col sm:flex-row bg-white border-[1px] border-gray-200 items-center sm:items-stretch shadow-sm rounded-sm overflow-hidden">
+                        <div class="w-full sm:w-[140px] bg-[#f5f5f5] shrink-0 relative">
+                            <!-- Temporary placeholder -->
+                            <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover aspect-square sm:aspect-auto">
+                        </div>
+                        <div class="flex flex-col grow justify-between text-center sm:text-left border-y-[15px] border-x-[15px] md:border-x-[20px] border-transparent w-full">
+                            <div>
+                                <div class="flex flex-col sm:flex-row justify-between items-center sm:items-start mb-[5px]">
+                                    <h3 class="text-base font-bold text-gray-900">Classic Urban Runner</h3>
+                                    <span class="text-lg font-black text-red-600 mt-[5px] sm:mt-0">$89.99</span>
+                                </div>
+                                <p class="text-xs text-gray-500 font-medium tracking-wide">Size: 42 | Color: Black</p>
+                            </div>
+                            
+                            <div class="flex justify-between items-center mt-[20px] pt-[15px] border-t-[1px] border-gray-100">
+                                <!-- Qty selector -->
+                                <div class="flex border-[1px] border-gray-300 rounded-sm overflow-hidden h-[30px]">
+                                    <button class="text-gray-500 hover:text-red-600 hover:bg-gray-50 w-[30px] flex items-center justify-center font-bold text-sm transition-colors">-</button>
+                                    <span class="font-bold text-gray-800 w-[40px] flex items-center justify-center bg-gray-50 border-x-[1px] border-gray-300 text-sm">1</span>
+                                    <button class="text-gray-500 hover:text-red-600 hover:bg-gray-50 w-[30px] flex items-center justify-center font-bold text-sm transition-colors">+</button>
+                                </div>
+                                <button class="text-xs font-semibold text-gray-400 hover:text-red-600 transition-colors uppercase flex items-center gap-1">
+                                    <i class="fas fa-trash-alt"></i> <span class="hidden sm:inline">Remove</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <!-- Order Summary Box (Minimalist) -->
+                <div class="lg:w-1/3 h-fit sticky top-[100px]">
+                    
+                    <div class="bg-white border-[1px] border-gray-200 shadow-sm rounded-sm border-x-[25px] border-y-[25px] border-transparent flex flex-col">
+                        <h2 class="text-sm font-bold uppercase text-gray-900 tracking-wider border-b-[1px] border-gray-200 pb-[15px] mb-[20px]">Order Summary</h2>
+                        
+                        <div class="flex flex-col gap-[15px]">
+                            <div class="flex justify-between items-center text-sm">
+                                <span class="text-gray-500 font-medium">Subtotal (2 items)</span>
+                                <span class="font-bold text-gray-800">$179.98</span>
+                            </div>
+                            <div class="flex justify-between items-center text-sm">
+                                <span class="text-gray-500 font-medium">Shipping</span>
+                                <span class="font-bold text-green-600 uppercase text-xs tracking-wider">Free</span>
+                            </div>
+                            <div class="flex justify-between items-center text-sm pb-[15px] border-b-[1px] border-gray-200">
+                                <span class="text-gray-500 font-medium">Taxes</span>
+                                <span class="font-bold text-gray-800">$12.50</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center text-lg mt-[5px]">
+                                <span class="font-black text-gray-900 uppercase tracking-widest">Total</span>
+                                <span class="font-black text-red-600">$192.48</span>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full bg-red-600 text-white font-bold text-sm uppercase tracking-widest border-[1px] border-red-600 hover:bg-white hover:text-red-600 transition-all duration-300 border-y-[12px] border-transparent mt-[30px] shadow-[0_4px_10px_rgba(220,38,38,0.2)] hover:shadow-none rounded-sm">
+                            Checkout
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

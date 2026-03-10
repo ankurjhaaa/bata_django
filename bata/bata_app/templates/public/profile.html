@@ -1,0 +1,182 @@
+{% extends 'layout/publiclayout.html' %}
+
+{% block title %}
+My Dashboard - Bata
+{% endblock %}
+
+{% block content %}
+<div class="w-full bg-[#f9fafb] min-h-[80vh] border-y-[40px] px-0 border-transparent">
+    <div class="max-w-7xl mx-auto border-x-[15px] md:border-x-[30px] border-transparent">
+        
+        <!-- Dashboard Header -->
+        <h1 class="text-2xl md:text-3xl font-black text-gray-900 uppercase tracking-widest mb-[30px] border-b-[2px] border-red-600 pb-[10px] inline-block">My Account</h1>
+        
+        <div class="flex flex-col lg:flex-row gap-[30px]">
+            
+            <!-- Sidebar -->
+            <div class="lg:w-[280px] shrink-0">
+                <div class="bg-white border-[1px] border-gray-200 shadow-sm rounded-sm mb-[15px]">
+                    <div class="border-[25px] border-transparent flex items-center gap-[15px]">
+                        <div class="w-[55px] h-[55px] bg-gray-100 rounded-full flex items-center justify-center border-[1px] border-gray-200 shrink-0">
+                            <span class="text-xl font-black text-gray-800">JD</span>
+                        </div>
+                        <div>
+                            <h2 class="text-sm font-black uppercase text-gray-900 tracking-wider mb-[5px]">John Doe</h2>
+                            <p class="text-xs font-medium text-gray-500">user@example.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border-[1px] border-gray-200 shadow-sm rounded-sm flex flex-col overflow-hidden">
+                    <a href="#" class="font-bold text-red-600 bg-red-50 border-l-[3px] !border-l-red-600 uppercase text-[11px] flex items-center tracking-widest transition-colors">
+                        <div class="border-y-[15px] border-x-[20px] border-transparent w-full flex items-center"><i class="fas fa-th-large w-[25px] text-sm"></i> Dashboard</div>
+                    </a>
+                    <a href="#" class="font-semibold text-gray-600 hover:text-red-600 hover:bg-gray-50 border-l-[3px] border-transparent uppercase text-[11px] flex items-center transition-colors tracking-widest border-t-[1px] border-gray-100">
+                        <div class="border-y-[15px] border-x-[20px] border-transparent w-full flex items-center"><i class="fas fa-box w-[25px] text-sm"></i> My Orders</div>
+                    </a>
+                    <a href="#" class="font-semibold text-gray-600 hover:text-red-600 hover:bg-gray-50 border-l-[3px] border-transparent uppercase text-[11px] flex items-center transition-colors tracking-widest border-t-[1px] border-gray-100">
+                        <div class="border-y-[15px] border-x-[20px] border-transparent w-full flex items-center"><i class="far fa-heart w-[25px] text-sm"></i> Wishlist</div>
+                    </a>
+                    <a href="#" class="font-semibold text-gray-600 hover:text-red-600 hover:bg-gray-50 border-l-[3px] border-transparent uppercase text-[11px] flex items-center transition-colors tracking-widest border-t-[1px] border-gray-100">
+                        <div class="border-y-[15px] border-x-[20px] border-transparent w-full flex items-center"><i class="fas fa-map-marker-alt w-[25px] text-sm"></i> Addresses</div>
+                    </a>
+                    <a href="#" class="font-semibold text-gray-600 hover:text-red-600 hover:bg-gray-50 border-l-[3px] border-transparent uppercase text-[11px] flex items-center transition-colors tracking-widest border-t-[1px] border-gray-100">
+                        <div class="border-y-[15px] border-x-[20px] border-transparent w-full flex items-center"><i class="far fa-id-badge w-[25px] text-sm"></i> Account Details</div>
+                    </a>
+                    <a href="#" class="font-semibold text-gray-600 hover:text-red-600 hover:bg-gray-50 border-l-[3px] border-transparent uppercase text-[11px] flex items-center transition-colors tracking-widest border-t-[1px] border-gray-100">
+                        <div class="border-y-[15px] border-x-[20px] border-transparent w-full flex items-center"><i class="fas fa-sign-out-alt w-[25px] text-sm"></i> Logout</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Main Content: Dashboard -->
+            <div class="grow flex flex-col gap-[30px]">
+                
+                <div>
+                    <h2 class="text-xl font-bold text-gray-800 mb-[10px]">Hello, John!</h2>
+                    <p class="text-sm text-gray-500 font-medium max-w-2xl leading-relaxed">From your account dashboard you can view your recent orders, manage your shipping addresses, and edit your password and account details.</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-[15px]">
+                    <div class="bg-white border-[1px] border-gray-200 shadow-sm rounded-sm hover:border-gray-300 transition-colors">
+                        <div class="border-[20px] border-transparent flex items-center justify-between h-full">
+                            <div>
+                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-[5px]">Total Orders</p>
+                                <h3 class="text-2xl font-black text-gray-900">12</h3>
+                            </div>
+                            <div class="w-[40px] h-[40px] bg-[#f9fafb] border-[1px] border-gray-100 rounded-full flex items-center justify-center text-gray-400">
+                                <i class="fas fa-box text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white border-[1px] border-gray-200 shadow-sm rounded-sm hover:border-gray-300 transition-colors">
+                        <div class="border-[20px] border-transparent flex items-center justify-between h-full">
+                            <div>
+                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-[5px]">Wishlist</p>
+                                <h3 class="text-2xl font-black text-gray-900">4</h3>
+                            </div>
+                            <div class="w-[40px] h-[40px] bg-[#f9fafb] border-[1px] border-gray-100 rounded-full flex items-center justify-center text-gray-400">
+                                <i class="far fa-heart text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white border-[1px] border-gray-200 shadow-sm rounded-sm hover:border-gray-300 transition-colors">
+                        <div class="border-[20px] border-transparent flex items-center justify-between h-full">
+                            <div>
+                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-[5px]">Addresses</p>
+                                <h3 class="text-2xl font-black text-gray-900">2</h3>
+                            </div>
+                            <div class="w-[40px] h-[40px] bg-[#f9fafb] border-[1px] border-gray-100 rounded-full flex items-center justify-center text-gray-400">
+                                <i class="fas fa-map-marker-alt text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Orders & Address (2 cols) -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-[25px]">
+                    
+                    <!-- Recent Orders -->
+                    <div class="bg-white border-[1px] border-gray-200 shadow-sm rounded-sm flex flex-col h-full">
+                        <div class="border-[25px] border-transparent h-full flex flex-col">
+                            <div class="flex justify-between items-center mb-[25px] border-b-[1px] border-gray-100 pb-[15px]">
+                                <h3 class="text-xs font-black uppercase text-gray-900 tracking-wider">Recent Orders</h3>
+                                <a href="#" class="text-[10px] font-bold text-red-600 uppercase tracking-widest hover:underline flex items-center gap-[5px]">View All <i class="fas fa-arrow-right text-[8px]"></i></a>
+                            </div>
+                            
+                            <div class="flex flex-col gap-[20px] grow">
+                                <!-- Order Item -->
+                                <div class="flex items-center gap-[15px]">
+                                    <div class="w-[65px] h-[65px] bg-[#f5f5f5] shrink-0 rounded-sm overflow-hidden border-[1px] border-gray-100">
+                                        <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-4.0.3&w=100&q=80" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="grow">
+                                        <div class="flex items-start justify-between">
+                                            <div>
+                                                <p class="text-[10px] font-bold text-gray-400 mb-[2px]">Order #892401</p>
+                                                <h4 class="text-sm font-bold text-gray-800 truncate pr-[10px]">Classic Urban Runner</h4>
+                                            </div>
+                                            <p class="text-sm font-black text-gray-900 shrink-0">$89.99</p>
+                                        </div>
+                                        <p class="text-[11px] font-medium text-green-600 mt-[5px] flex items-center gap-[5px]"><i class="fas fa-check-circle"></i> Delivered Oct 24</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Divider -->
+                                <div class="w-full h-[1px] bg-gray-100"></div>
+
+                                <!-- Order Item -->
+                                <div class="flex items-center gap-[15px]">
+                                    <div class="w-[65px] h-[65px] bg-[#f5f5f5] shrink-0 rounded-sm overflow-hidden border-[1px] border-gray-100">
+                                        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&w=100&q=80" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="grow">
+                                         <div class="flex items-start justify-between">
+                                            <div>
+                                                <p class="text-[10px] font-bold text-gray-400 mb-[2px]">Order #892305</p>
+                                                <h4 class="text-sm font-bold text-gray-800 truncate pr-[10px]">Elegant Evening Pump</h4>
+                                            </div>
+                                            <p class="text-sm font-black text-gray-900 shrink-0">$88.00</p>
+                                        </div>
+                                        <p class="text-[11px] font-medium text-green-600 mt-[5px] flex items-center gap-[5px]"><i class="fas fa-check-circle"></i> Delivered Sep 12</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Default Address -->
+                    <div class="bg-white border-[1px] border-gray-200 shadow-sm rounded-sm flex flex-col h-full">
+                        <div class="border-[25px] border-transparent h-full flex flex-col">
+                            <div class="flex justify-between items-center mb-[25px] border-b-[1px] border-gray-100 pb-[15px]">
+                                <h3 class="text-xs font-black uppercase text-gray-900 tracking-wider">Default Address</h3>
+                                <a href="#" class="text-[10px] font-bold text-gray-400 hover:text-red-600 uppercase tracking-widest flex items-center gap-[5px] transition-colors"><i class="fas fa-pen text-[9px]"></i> Edit</a>
+                            </div>
+                            
+                            <div class="bg-[#f9fafb] border-[1px] border-gray-200 rounded-sm grow flex flex-col justify-center relative overflow-hidden">
+                                <div class="border-[20px] border-transparent w-full h-full relative z-10">
+                                    <h4 class="text-sm font-bold text-gray-900 mb-[10px] flex items-center gap-[10px]">John Doe <span class="bg-red-100 text-red-600 text-[9px] border-y-[2px] border-x-[8px] border-transparent rounded-sm uppercase tracking-widest font-black inline-block">Home</span></h4>
+                                    <p class="text-xs text-gray-500 font-medium leading-[20px] mb-[15px]">
+                                        1234 Commerce Street, Suite 500<br>
+                                        New York, NY 10001<br>
+                                        United States
+                                    </p>
+                                    <p class="text-xs text-gray-600 font-bold flex items-center gap-[10px]">
+                                        <i class="fas fa-phone-alt text-gray-400"></i> +1 (234) 567-8900
+                                    </p>
+                                </div>
+                                <!-- Subtle decorative bg icon -->
+                                <i class="fas fa-map-marker-alt absolute -bottom-[15px] -right-[10px] text-[60px] text-gray-100 opacity-50 z-0"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
