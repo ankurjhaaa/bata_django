@@ -13,19 +13,24 @@ Red Boost Sneaker - Bata
             <ol class="inline-flex items-center gap-[10px]">
                 <li><a href="/" class="hover:text-red-600 transition-colors">Home</a></li>
                 <li>/</li>
-                <li><a href="/search" class="hover:text-red-600 transition-colors">Men's Sneakers</a></li>
+                <li><a href="/search?category={{ product.category.slug }}" class="hover:text-red-600 transition-colors">{{ product.category.name }}</a></li>
                 <li>/</li>
-                <li class="text-gray-900" aria-current="page">Red Boost Sneaker</li>
+                <li class="text-gray-900" aria-current="page">{{ product.name }}</li>
             </ol>
         </nav>
 
         <!-- Product Details -->
         <div class="flex flex-col md:flex-row gap-[40px] bg-white border-[1px] border-gray-200 shadow-sm rounded-sm mb-[60px]">
             
+            {% with variants.first as current_variant %}
             <!-- Image Gallery -->
             <div class="md:w-1/2 shrink-0 border-[20px] md:border-[40px] border-transparent">
                 <div class="relative aspect-square bg-[#f5f5f5] rounded-sm overflow-hidden mb-[15px]">
-                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Red Boost Sneaker">
+                    {% if current_variant and current_variant.images.first %}
+                    <img src="{{ current_variant.images.first.image.url }}" class="w-full h-full object-cover" alt="{{ product.name }}">
+                    {% else %}
+                    <div class="w-full h-full flex items-center justify-center text-gray-300"><i class="fas fa-image text-6xl"></i></div>
+                    {% endif %}
                     <span class="absolute top-[15px] left-[15px] bg-black text-white text-[11px] font-bold uppercase tracking-wider border-[2px] border-transparent"><span class="border-y-[3px] border-x-[8px] border-transparent inline-block">New</span></span>
                     <button class="absolute top-[15px] right-[15px] w-[40px] h-[40px] bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-600 shadow-sm transition-colors border-[2px] border-transparent">
                         <i class="far fa-heart text-lg"></i>
@@ -33,27 +38,24 @@ Red Boost Sneaker - Bata
                 </div>
                 
                 <!-- Thumbnails -->
-                <div class="flex gap-[10px]">
-                    <div class="w-1/4 aspect-square bg-[#f5f5f5] rounded-sm overflow-hidden border-[2px] border-gray-900 cursor-pointer">
-                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover">
-                    </div>
-                    <div class="w-1/4 aspect-square bg-[#f5f5f5] rounded-sm overflow-hidden border-[1px] border-gray-200 hover:border-gray-400 cursor-pointer transition-colors">
-                        <!-- Simulated alternate angle -->
-                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover hue-rotate-[10deg]">
-                    </div>
-                    <div class="w-1/4 aspect-square bg-[#f5f5f5] rounded-sm overflow-hidden border-[1px] border-gray-200 hover:border-gray-400 cursor-pointer transition-colors">
-                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover hue-rotate-[-10deg]">
-                    </div>
+                <div class="flex gap-[10px] overflow-x-auto pb-2">
+                    {% if current_variant %}
+                        {% for img in current_variant.images.all %}
+                        <div class="w-1/4 shrink-0 aspect-square bg-[#f5f5f5] rounded-sm overflow-hidden border-[1px] hover:border-gray-400 {% if forloop.first %}border-[2px] border-gray-900{% else %}border-gray-200{% endif %} cursor-pointer transition-colors">
+                            <img src="{{ img.image.url }}" class="w-full h-full object-cover">
+                        </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
 
             <!-- Product Info -->
             <div class="md:w-1/2 border-[20px] md:border-y-[40px] md:border-r-[40px] md:border-l-0 border-transparent flex flex-col">
-                <p class="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-[10px]">Men • Running</p>
-                <h1 class="text-3xl md:text-4xl font-black text-gray-900 mb-[15px] leading-tight text-balance">Red Boost Sneaker</h1>
+                <p class="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-[10px]">{{ product.category.name }}</p>
+                <h1 class="text-3xl md:text-4xl font-black text-gray-900 mb-[15px] leading-tight text-balance">{{ product.name }}</h1>
                 
                 <div class="flex items-center gap-[15px] mb-[25px]">
-                    <p class="text-2xl md:text-3xl font-black text-red-600">$129.00</p>
+                    <p class="text-2xl md:text-3xl font-black text-red-600">${{ current_variant.price|default:'--' }}</p>
                     <div class="flex text-yellow-400 text-sm">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -65,41 +67,39 @@ Red Boost Sneaker - Bata
                 </div>
 
                 <p class="text-sm text-gray-500 font-medium leading-relaxed mb-[30px]">
-                    Experience unparalleled comfort and bold style with the Red Boost Sneaker. Engineered for performance and designed for the streets, featuring breathable mesh upper and ultra-responsive cushioning.
+                    {{ product.description }}
                 </p>
 
-                <!-- Color Selection -->
+                <!-- Color Selection (Static mapped to available variants for now) -->
                 <div class="mb-[30px]">
-                    <h3 class="text-[11px] font-bold text-gray-900 uppercase tracking-widest mb-[15px]">Color: <span class="text-gray-500">Crimson Red</span></h3>
-                    <div class="flex gap-[12px]">
-                        <button class="w-[35px] h-[35px] rounded-full bg-red-600 border-[2px] border-white shadow-[0_0_0_2px_#000] focus:outline-none"></button>
-                        <button class="w-[35px] h-[35px] rounded-full bg-black border-[1px] border-gray-200 hover:border-gray-400 transition-colors focus:outline-none"></button>
-                        <button class="w-[35px] h-[35px] rounded-full bg-blue-600 border-[1px] border-gray-200 hover:border-gray-400 transition-colors focus:outline-none"></button>
+                    <h3 class="text-[11px] font-bold text-gray-900 uppercase tracking-widest mb-[15px]">Colors</h3>
+                    <div class="flex gap-[12px] flex-wrap">
+                        <!-- We ideally should group variants by color, but we'll list available colors here -->
+                        {% regroup variants by color as color_list %}
+                        {% for color_grp in color_list %}
+                        <button class="w-[35px] h-[35px] rounded-full {% if forloop.first %}border-[2px] border-white shadow-[0_0_0_2px_#000]{% else %}border-[1px] border-gray-200 hover:border-gray-400{% endif %} transition-colors focus:outline-none" style="background-color: {{ color_grp.grouper.hex_code|default:'#ccc' }};" title="{{ color_grp.grouper.name }}"></button>
+                        {% endfor %}
                     </div>
                 </div>
 
                 <!-- Size Selection -->
                 <div class="mb-[40px]">
                     <div class="flex justify-between items-center mb-[15px]">
-                        <h3 class="text-[11px] font-bold text-gray-900 uppercase tracking-widest">Select Size (US)</h3>
+                        <h3 class="text-[11px] font-bold text-gray-900 uppercase tracking-widest">Available Sizes</h3>
                         <a href="#" class="text-[10px] font-bold text-gray-400 uppercase tracking-widest underline hover:text-red-600">Size Guide</a>
                     </div>
                     <div class="grid grid-cols-4 sm:grid-cols-5 gap-[10px]">
-                        <button class="border-[1px] border-gray-200 bg-white text-gray-500 font-bold text-sm border-y-[10px] border-transparent hover:border-black hover:text-black transition-colors rounded-sm">7</button>
-                        <button class="border-[1px] border-gray-200 bg-white text-gray-500 font-bold text-sm border-y-[10px] border-transparent hover:border-black hover:text-black transition-colors rounded-sm">7.5</button>
-                        <button class="border-[1px] border-black bg-white text-black font-bold text-sm border-y-[10px] border-transparent rounded-sm relative overflow-hidden">
-                            8
+                        {% regroup variants by size as size_list %}
+                        {% for size_grp in size_list %}
+                        <button class="border-[1px] {% if forloop.first %}border-black text-black{% else %}border-gray-200 text-gray-500 hover:border-black hover:text-black{% endif %} bg-white font-bold text-sm border-y-[10px] border-transparent transition-colors rounded-sm relative overflow-hidden">
+                            {{ size_grp.grouper.name }}
+                            {% if forloop.first %}
                             <span class="absolute top-0 right-0 w-[0] h-[0] border-t-[10px] border-r-[10px] border-r-black border-t-transparent"></span>
+                            {% endif %}
                         </button>
-                        <button class="border-[1px] border-gray-200 bg-white text-gray-500 font-bold text-sm border-y-[10px] border-transparent hover:border-black hover:text-black transition-colors rounded-sm">8.5</button>
-                        <button class="border-[1px] border-gray-200 bg-white text-gray-500 font-bold text-sm border-y-[10px] border-transparent hover:border-black hover:text-black transition-colors rounded-sm">9</button>
-                        <button class="border-[1px] border-gray-200 bg-white text-gray-500 font-bold text-sm border-y-[10px] border-transparent hover:border-black hover:text-black transition-colors rounded-sm">9.5</button>
-                        <button class="border-[1px] border-gray-100 bg-gray-50 text-gray-300 font-bold text-sm border-y-[10px] border-transparent cursor-not-allowed rounded-sm relative" disabled>
-                            10
-                            <div class="absolute inset-0 flex items-center justify-center"><div class="w-full h-[1px] bg-gray-200 rotate-45 transform"></div></div>
-                        </button>
-                        <button class="border-[1px] border-gray-200 bg-white text-gray-500 font-bold text-sm border-y-[10px] border-transparent hover:border-black hover:text-black transition-colors rounded-sm">10.5</button>
-                        <button class="border-[1px] border-gray-200 bg-white text-gray-500 font-bold text-sm border-y-[10px] border-transparent hover:border-black hover:text-black transition-colors rounded-sm">11</button>
+                        {% empty %}
+                        <p class="text-sm text-gray-500">No sizes currently available.</p>
+                        {% endfor %}
                     </div>
                 </div>
 
@@ -120,57 +120,56 @@ Red Boost Sneaker - Bata
                 <!-- Product Metadta -->
                 <div class="mt-[30px] border-t-[1px] border-gray-100 border-t-[20px] !border-t-transparent pt-[20px]">
                     <div class="flex flex-col gap-[10px]">
-                        <p class="text-xs text-gray-500 font-medium"><span class="font-bold text-gray-900 w-[80px] inline-block uppercase tracking-widest text-[9px]">SKU:</span> BTA-RD-892</p>
-                        <p class="text-xs text-gray-500 font-medium"><span class="font-bold text-gray-900 w-[80px] inline-block uppercase tracking-widest text-[9px]">Availability:</span> <span class="text-green-600 font-bold">In Stock</span> (Only 5 left)</p>
+                        <p class="text-xs text-gray-500 font-medium"><span class="font-bold text-gray-900 w-[80px] inline-block uppercase tracking-widest text-[9px]">SKU:</span> {{ current_variant.sku|default:'N/A' }}</p>
+                        <p class="text-xs text-gray-500 font-medium"><span class="font-bold text-gray-900 w-[80px] inline-block uppercase tracking-widest text-[9px]">Availability:</span> 
+                            {% if current_variant and current_variant.stock_quantity > 0 %}
+                            <span class="text-green-600 font-bold">In Stock</span> (Only {{ current_variant.stock_quantity }} left)
+                            {% else %}
+                            <span class="text-red-500 font-bold">Out of Stock</span>
+                            {% endif %}
+                        </p>
                     </div>
                 </div>
             </div>
+            {% endwith %}
         </div>
 
         <!-- You May Also Like -->
         <div>
             <div class="flex justify-between items-end mb-[25px] border-b-[2px] border-red-600 pb-[10px]">
                <h2 class="text-lg font-black text-gray-900 uppercase tracking-widest">You May Also Like</h2>
-               <a href="/search" class="text-[10px] font-bold text-gray-400 uppercase tracking-widest hover:text-red-600">View All</a>
+               <a href="/search?category={{ product.category.slug }}" class="text-[10px] font-bold text-gray-400 uppercase tracking-widest hover:text-red-600">View All</a>
             </div>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-[15px] md:gap-[25px]">
-                {% for i in '1234' %}
-                <div class="group bg-white border-[1px] border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 relative rounded-sm flex flex-col cursor-pointer" onclick="window.location.href='/product'">
+                {% for rel_prod in related_products %}
+                <div class="group bg-white border-[1px] border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 relative rounded-sm flex flex-col cursor-pointer" onclick="window.location.href='{% url 'product' rel_prod.slug %}'">
                     <div class="border-[15px] border-transparent grow flex flex-col">
                         <div class="relative aspect-[4/5] bg-[#f5f5f5] mb-[15px] overflow-hidden rounded-sm w-full">
-                            {% if forloop.counter == 1 %}
-                                <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                            {% elif forloop.counter == 2 %}
-                                <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                                <span class="absolute top-[8px] left-[8px] bg-black text-white text-[10px] font-bold uppercase tracking-wider border-[2px] border-transparent"><span class="border-y-[2px] border-x-[6px] border-transparent inline-block">Trending</span></span>
-                            {% elif forloop.counter == 3 %}
-                                <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                                <span class="absolute top-[8px] left-[8px] bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider border-[2px] border-transparent"><span class="border-y-[2px] border-x-[6px] border-transparent inline-block">-20%</span></span>
-                            {% else %}
-                                <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            {% with rel_prod.variants.first as r_variant %}
+                                {% with r_variant.images.first as r_img %}
+                                    {% if r_img %}
+                                    <img src="{{ r_img.image.url }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    {% else %}
+                                    <div class="w-full h-full flex items-center justify-center text-gray-300"><i class="fas fa-image text-4xl group-hover:scale-105 transition-transform duration-700"></i></div>
+                                    {% endif %}
+                                {% endwith %}
+                            {% endwith %}
+                            
+                            {% if forloop.counter <= 2 %}
+                            <span class="absolute top-[8px] left-[8px] bg-black text-white text-[10px] font-bold uppercase tracking-wider border-[2px] border-transparent"><span class="border-y-[2px] border-x-[6px] border-transparent inline-block">New</span></span>
                             {% endif %}
                         </div>
                         <div class="flex flex-col text-center mt-auto">
-                            {% if forloop.counter == 1 %}
-                                <h3 class="text-xs font-bold text-gray-800 mb-[5px] truncate group-hover:text-red-600 transition-colors">Classic White Oxford</h3>
-                                <p class="text-sm font-black text-gray-900">$89.50</p>
-                            {% elif forloop.counter == 2 %}
-                                <h3 class="text-xs font-bold text-gray-800 mb-[5px] truncate group-hover:text-red-600 transition-colors">Neon Runner V2</h3>
-                                <p class="text-sm font-black text-gray-900">$105.00</p>
-                            {% elif forloop.counter == 3 %}
-                                <h3 class="text-xs font-bold text-gray-800 mb-[5px] truncate group-hover:text-red-600 transition-colors">Elegant Evening Pump</h3>
-                                <div class="flex items-center justify-center gap-[10px]">
-                                    <p class="text-[11px] text-gray-400 font-bold line-through">$110.00</p>
-                                    <p class="text-sm font-black text-red-600">$88.00</p>
-                                </div>
-                            {% else %}
-                                <h3 class="text-xs font-bold text-gray-800 mb-[5px] truncate group-hover:text-red-600 transition-colors">Classic Urban Runner</h3>
-                                <p class="text-sm font-black text-gray-900">$89.99</p>
-                            {% endif %}
+                            <h3 class="text-xs font-bold text-gray-800 mb-[5px] truncate group-hover:text-red-600 transition-colors">{{ rel_prod.name }}</h3>
+                            {% with rel_prod.variants.first as r_variant %}
+                            <p class="text-sm font-black text-gray-900">${{ r_variant.price|default:'--' }}</p>
+                            {% endwith %}
                         </div>
                     </div>
                 </div>
+                {% empty %}
+                <p class="text-gray-500 text-sm italic col-span-full">No related products found.</p>
                 {% endfor %}
             </div>
         </div>

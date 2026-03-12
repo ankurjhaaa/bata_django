@@ -2,17 +2,40 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from .models import Category, Product
+from .models import Color, Size, ProductVariant, VariantImage
+
 
 def home(request):
-    return render(request, 'public/home.html')
+    categories = Category.objects.filter(is_active=True)
+    products = Product.objects.filter(is_active=True).prefetch_related('variants', 'variants__images')[:8]
+    return render(request, 'public/home.html', {
+        'categories': categories,
+        'products': products
+    })
 
 def search(request):
-    return render(request, 'public/search.html')
+    q = request.GET.get('q', '')
+    if q:
+        products = Product.objects.filter(is_active=True, name__icontains=q).prefetch_related('variants', 'variants__images')
+    else:
+        products = Product.objects.filter(is_active=True).prefetch_related('variants', 'variants__images')
+    return render(request, 'public/search.html', {'products': products, 'q': q})
 
-def product(request):
-    return render(request, 'public/product.html')
+def product(request, slug):
+    product = Product.objects.get(slug=slug, is_active=True)
+    variants = product.variants.all().prefetch_related('images')
+    related_products = Product.objects.filter(
+        category=product.category, 
+        is_active=True
+    ).exclude(id=product.id).prefetch_related('variants', 'variants__images')[:4]
+    
+    return render(request, 'public/product.html', {
+        'product': product,
+        'variants': variants,
+        'related_products': related_products
+    })
 
-# --- Authentication Views ---
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -61,7 +84,6 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
-# --- Protected Views ---
 
 @login_required
 def cart(request):
@@ -90,10 +112,7 @@ def addresses(request):
 @login_required
 def wishlist(request):
     return render(request, 'public/wishlist.html')
-# ==========================================
-# CUSTOM ADMIN PORTAL (UNAUTHENTICATED)
-# ==========================================
-from .models import Category, Product
+
 
 def admin_dashboard(request):
     categories_count = Category.objects.count()
@@ -103,7 +122,6 @@ def admin_dashboard(request):
         'products_count': products_count
     })
 
-# --- Category CRUD ---
 def admin_categories(request):
     categories = Category.objects.all().order_by('-created_at')
     return render(request, 'admin_custom/categories/list.html', {'categories': categories})
@@ -153,7 +171,6 @@ def admin_category_delete(request, id):
         Category.objects.filter(id=id).delete()
     return redirect('admin_categories')
 
-# --- Product CRUD ---
 def admin_products(request):
     products = Product.objects.all().select_related('category').order_by('-created_at')
     return render(request, 'admin_custom/products/list.html', {'products': products})
@@ -199,9 +216,11 @@ def admin_product_delete(request, id):
         Product.objects.filter(id=id).delete()
     return redirect('admin_products')
 
-from .models import Color, Size, ProductVariant, VariantImage
 
-# --- Color CRUD ---
+
+
+
+
 def admin_colors(request):
     colors = Color.objects.all().order_by('name')
     return render(request, 'admin_custom/colors/list.html', {'colors': colors})
@@ -253,7 +272,10 @@ def admin_size_delete(request, id):
         Size.objects.filter(id=id).delete()
     return redirect('admin_sizes')
 
-# --- Variant CRUD ---
+
+
+
+
 def admin_variant_create(request, product_id):
     product = Product.objects.get(id=product_id)
     colors = Color.objects.all()
